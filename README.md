@@ -10,4 +10,5 @@ aligned with their project status:
 GitHub's built-in **Auto-close issue** workflow handles the immediate close.
 The scheduled workflow reconciles both directions every five minutes because
 user-owned GitHub Projects do not emit an Actions event when an item changes
-status.
+status. A monthly heartbeat keeps GitHub from disabling scheduled workflows
+after 60 days of inactivity in this public automation repository.
