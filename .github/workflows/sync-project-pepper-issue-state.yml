@@ -1,0 +1,28 @@
+name: Sync Project Pepper issue state
+
+on:
+  schedule:
+    - cron: "*/5 * * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: project-pepper-issue-state
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    env:
+      GH_TOKEN: ${{ secrets.PROJECT_PEPPER_TOKEN }}
+      PROJECT_OWNER: aftrmusicbooking-bot
+      PROJECT_NUMBER: "2"
+      DONE_STATUS: Done
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v4
+
+      - name: Match issue state to Project status
+        run: .github/scripts/sync-project-pepper-issue-state.sh
